@@ -128,8 +128,19 @@ def detect(save_img=False):
                         label = f'{names[int(cls)]} {conf:.2f}'
                         plot_one_box(xyxy, im0, label=label, color=colors[int(cls)], line_thickness=1)
 
+                    distance_away_from_center_c1 = int(xyxy[0] - (640/2))
+                    distance_away_from_center_c2 = int(xyxy[2] - (640/2))
+                    if distance_away_from_center_c1 > 0 and distance_away_from_center_c2 > 0: # detected on right hand side
+                        print(f'{label} Inference - right')
+                    elif distance_away_from_center_c1 < 0 and distance_away_from_center_c2 < 0: # detected on left hand side
+                        print(f'{label} Inference - left')
+                    elif abs(distance_away_from_center_c1) > abs(distance_away_from_center_c2): # detected on more to left side
+                        print(f'{label} Inference - left')
+                    elif abs(distance_away_from_center_c1) < abs(distance_away_from_center_c2): # detected on more to right side
+                       print(f'{label} Inference - right')
+
             # Print time (inference + NMS)
-            print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
+            # print(f'{s}Done. ({(1E3 * (t2 - t1)):.1f}ms) Inference, ({(1E3 * (t3 - t2)):.1f}ms) NMS')
 
             # Stream results
             if view_img:

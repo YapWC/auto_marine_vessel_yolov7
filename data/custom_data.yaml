@@ -1,0 +1,4 @@
+train: /home/yapch/Obstacle_Images_Resize/All_Data/YOLODataset/images/train/
+val: /home/yapch/Obstacle_Images_Resize/All_Data/YOLODataset/images/val/
+nc: 2
+names: ["YellowTower", "RedTower"]
